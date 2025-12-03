@@ -1,0 +1,630 @@
+/* Global */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Navbar */
+.navbar-nike {
+  background-color: #111;
+  border-bottom: 1px solid #333;
+}
+
+.navbar-nike .navbar-brand {
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.navbar-nike .nav-link {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* Main container */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Hero / page header */
+.page-hero {
+  margin-bottom: 2rem;
+}
+
+.page-hero-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.page-hero-subtitle {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Shop grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 45px rgba(0,0,0,0.12);
+}
+
+.product-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.product-name {
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.product-price {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.product-stock {
+  font-size: 0.8rem;
+  color: #6b6b6b;
+}
+
+/* Buttons */
+.btn-pill {
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45rem 1.4rem;
+}
+
+.btn-dark-nike {
+  background-color: #111;
+  color: #fff;
+  border: none;
+}
+
+.btn-dark-nike:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn-outline-nike {
+  border-radius: 999px;
+  border: 1px solid #111;
+  color: #111;
+  background: transparent;
+  font-size: 0.85rem;
+}
+
+.btn-outline-nike:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+/* Cart / Checkout / Auth cards */
+.card-nike {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* Table styling */
+.table-nike thead th {
+  border-bottom: 2px solid #ddd;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.table-nike tbody td {
+  vertical-align: middle;
+}
+
+/* Thank you page */
+.thankyou-title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.thankyou-subtitle {
+  color: #555;
+}
+
+/* Forms */
+.form-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+}
+
+.form-control, .form-select {
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+/* Small utility spacing tweaks */
+.mt-40 {
+  margin-top: 2.5rem;
+}
+
+/* Hover quick add */
+.quick-add-wrapper {
+  margin-top: 1rem;
+}
+
+.quick-add {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.product-card:hover .quick-add {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==== GLOBAL LOOK & FEEL ==== */
+:root {
+  --bg-main: #05040a;
+  --bg-elevated: #0d0c16;
+  --bg-card: #151523;
+  --bg-soft: #1f1f33;
+  --accent: #ffffff;
+  --accent-soft: #f5f5f5;
+  --accent-strong: #ff6b3d;
+  --accent-muted: #b3b3c6;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+  --transition-fast: 0.18s ease-out;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(255, 107, 61, 0.12), transparent 55%),
+    var(--bg-main);
+  color: var(--accent-soft);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+/* ==== NAVBAR ==== */
+.navbar {
+  background: rgba(8, 8, 16, 0.9) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.navbar-brand span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-strong), #ffb347);
+  color: #050308;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--accent-muted) !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent-soft) !important;
+}
+
+/* ==== PAGE SHELL ==== */
+.container,
+.container-fluid {
+  padding-top: 1.75rem;
+  padding-bottom: 2.5rem;
+}
+
+/* ==== HERO SECTION ==== */
+.page-hero {
+  margin-bottom: 1.5rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent),
+    radial-gradient(circle at 10% 0%, rgba(255, 107, 61, 0.18), transparent 55%),
+    var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.page-hero-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.page-hero-subtitle {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--accent-muted);
+}
+
+/* ==== GENERIC CARD (ADMIN + DASHBOARD) ==== */
+.card-nike {
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.02), transparent 55%),
+              var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  padding: 1.6rem 1.7rem;
+  margin-bottom: 1.4rem;
+}
+
+/* ==== PRODUCT GRID ==== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.3rem;
+}
+
+.product-card {
+  position: relative;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.03), transparent 65%),
+              var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.1rem 1.1rem 1.2rem;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  opacity: 0;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.09), transparent 60%);
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.product-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.product-price {
+  font-weight: 700;
+  font-size: 0.97rem;
+  margin-top: 0.1rem;
+}
+
+.product-stock {
+  font-size: 0.76rem;
+  color: var(--accent-muted);
+}
+
+/* ==== BUTTONS ==== */
+.btn-pill {
+  border-radius: var(--radius-pill) !important;
+}
+
+.btn-dark-nike {
+  background: linear-gradient(135deg, #ffffff, #eaeaea);
+  color: #05040a;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  padding-inline: 1.4rem;
+}
+
+.btn-dark-nike:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+.btn-outline-nike {
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--accent-soft);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.btn-outline-nike:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ==== TABLES (ADMIN) ==== */
+.table-nike {
+  color: var(--accent-soft);
+  font-size: 0.88rem;
+}
+
+.table-nike thead tr {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.table-nike th,
+.table-nike td {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table-danger {
+  background: rgba(255, 107, 61, 0.16) !important;
+}
+
+/* ==== MISC ==== */
+.mt-40 {
+  margin-top: 2.5rem;
+}
+
+.thankyou-title {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.thankyou-subtitle {
+  font-size: 0.96rem;
+  color: var(--accent-muted);
+}
+
+/* ==== LOGIN PAGE HERO ==== */
+.login-bg {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(255, 107, 61, 0.25), transparent 60%),
+    linear-gradient(135deg, #05040a, #0d0c1c);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+}
+
+.login-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 60%);
+  z-index: 1;
+}
+
+.login-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  padding: 3rem 2.5rem;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.login-brand h1 {
+  font-size: 3.6rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  margin: 0;
+  color: #ffffff;
+}
+
+.login-brand p {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.login-card {
+  max-width: 420px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(20, 20, 35, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 22px;
+  padding: 2.3rem 2.1rem 2.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.8);
+}
+
+/* ====== PRODUCT GRID (NO IMAGES, CLEAN) ====== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+}
+
+/* Card container */
+.product-card {
+  background: rgba(15, 15, 30, 0.96);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.1rem 1.15rem 1.1rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.8rem;
+  transition:
+    transform 0.16s ease-out,
+    box-shadow 0.16s ease-out,
+    border-color 0.16s ease-out,
+    background 0.16s ease-out;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Top section: badge, price, name, stock */
+.product-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Badge pill */
+.product-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #f7f7f7;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Name & price */
+.product-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.product-price {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+/* Stock text */
+.product-meta {
+  font-size: 0.78rem;
+  color: var(--accent-muted, #a3a3c0);
+}
+
+/* Bottom section: quantity + button */
+.product-card-bottom {
+  margin-top: 0.3rem;
+}
+
+.quick-add {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Quantity input */
+.quick-add .form-control {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(8, 8, 20, 0.98);
+  color: #f7f7f7;
+  font-size: 0.84rem;
+  padding-inline: 0.9rem;
+}
+
+/* Button already styled by .btn-dark-nike + .btn-pill */
+.quick-add button {
+  height: 36px;
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+  .login-content {
+    grid-template-columns: 1fr;
+    gap: 2.3rem;
+    padding: 2.2rem 1.6rem;
+    text-align: center;
+  }
+
+  .login-brand h1 {
+    font-size: 2.7rem;
+    letter-spacing: 0.18em;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+}

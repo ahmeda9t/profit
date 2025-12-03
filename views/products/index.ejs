@@ -1,0 +1,35 @@
+<%- include('../layout', { body: '' }) %>
+<div class="d-flex justify-content-between mb-3">
+  <h2>Products</h2>
+  <% if (currentUser.role === 'Admin') { %>
+  <a class="btn btn-success" href="/products/new">Add Product</a>
+  <% } %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th><th>Name</th><th>Category</th><th>Brand</th><th>Price</th><th>Stock</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(p => { %>
+      <tr class="<%= p.quantity_on_hand <= 5 ? 'table-danger' : '' %>">
+        <td><%= p.product_id %></td>
+        <td><%= p.name %></td>
+        <td><%= p.category_name %></td>
+        <td><%= p.brand_name %></td>
+        <td>$<%= p.unit_price %></td>
+        <td><%= p.quantity_on_hand %></td>
+        <td>
+          <% if (currentUser.role === 'Admin') { %>
+          <a href="/products/<%= p.product_id %>/edit" class="btn btn-sm btn-primary">Edit</a>
+          <form method="post" action="/products/<%= p.product_id %>/delete" style="display:inline">
+            <button class="btn btn-sm btn-danger" onclick="return confirm('Delete product?')">Delete</button>
+          </form>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

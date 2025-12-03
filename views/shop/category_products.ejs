@@ -1,0 +1,41 @@
+<%- include('../layout', { body: '' }) %>
+
+<section class="page-hero">
+  <div class="d-flex justify-content-between align-items-end">
+    <div>
+      <h1 class="page-hero-title"><%= category.name %></h1>
+      <p class="page-hero-subtitle">Explore the latest in <%= category.name.toLowerCase() %>.</p>
+    </div>
+    <div>
+      <a href="/shop/categories" class="btn btn-outline-nike btn-pill">All categories</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <% if (!products.length) { %>
+    <p>No products in this category yet.</p>
+  <% } else { %>
+    <div class="product-grid">
+      <% products.forEach(p => { %>
+        <div class="product-card">
+          <div>
+            <div class="product-tag"><%= category.name %></div>
+            <div class="product-name"><%= p.name %></div>
+            <div class="product-price">$<%= p.unit_price %></div>
+            <div class="product-stock">In stock: <%= p.quantity_on_hand %></div>
+          </div>
+          <div class="mt-3">
+            <form method="post" action="/shop/add">
+              <input type="hidden" name="product_id" value="<%= p.product_id %>">
+              <div class="input-group">
+                <input class="form-control" type="number" name="quantity" value="1" min="1">
+                <button class="btn btn-dark-nike btn-pill" type="submit">Add to Cart</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</section>

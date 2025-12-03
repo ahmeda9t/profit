@@ -1,0 +1,56 @@
+<%- include('../layout', { body: '' }) %>
+<h2><%= product ? 'Edit Product' : 'New Product' %></h2>
+<form method="post" action="<%= product ? '/products/' + product.product_id : '/products' %>">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input class="form-control" name="name" required value="<%= product ? product.name : '' %>">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select class="form-select" name="category_id">
+      <% categories.forEach(c => { %>
+        <option value="<%= c.category_id %>" <%= product && product.category_id === c.category_id ? 'selected' : '' %>>
+          <%= c.name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Brand</label>
+    <select class="form-select" name="brand_id">
+      <% brands.forEach(b => { %>
+        <option value="<%= b.brand_id %>" <%= product && product.brand_id === b.brand_id ? 'selected' : '' %>>
+          <%= b.name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Supplier</label>
+    <select class="form-select" name="supplier_id">
+      <% suppliers.forEach(s => { %>
+        <option value="<%= s.supplier_id %>" <%= product && product.supplier_id === s.supplier_id ? 'selected' : '' %>>
+          <%= s.name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Unit Price</label>
+    <input class="form-control" type="number" step="0.01" name="unit_price" required value="<%= product ? product.unit_price : '' %>">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Badge</label>
+    <select class="form-select" name="badge">
+      <option value="" <%= !product || !product.badge ? 'selected' : '' %>>None</option>
+      <option value="New" <%= product && product.badge === 'New' ? 'selected' : '' %>>New</option>
+      <option value="Best Seller" <%= product && product.badge === 'Best Seller' ? 'selected' : '' %>>Best Seller</option>
+      <option value="Sale" <%= product && product.badge === 'Sale' ? 'selected' : '' %>>Sale</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Quantity on Hand</label>
+    <input class="form-control" type="number" name="quantity_on_hand" required value="<%= product ? product.quantity_on_hand : 0 %>">
+  </div>
+  <button class="btn btn-primary">Save</button>
+</form>

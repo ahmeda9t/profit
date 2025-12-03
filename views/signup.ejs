@@ -1,0 +1,30 @@
+<%- include('layout', { body: '' }) %>
+
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <h3 class="mb-3 text-center">Create Account</h3>
+
+    <% if (error) { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+
+    <form method="post" action="/signup">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input class="form-control" name="username" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input class="form-control" type="password" name="password" required>
+      </div>
+
+      <button class="btn btn-success w-100">Sign Up</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="/login">Already have an account? Log in</a>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,214 @@
+<%- include('../layout', { body: '' }) %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="page-hero">
+      <h1 class="page-hero-title">Checkout</h1>
+      <p class="page-hero-subtitle">One step away from getting your gear.</p>
+    </div>
+
+    <div class="card-nike">
+      <% if (error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <h5 class="mb-3">Order Summary</h5>
+      <ul>
+        <% cart.forEach(item => { %>
+          <li><%= item.quantity %> × <strong><%= item.name %></strong> ($<%= item.unit_price %> each)</li>
+        <% }) %>
+      </ul>
+      <p><strong>Total: $<%= total.toFixed(2) %></strong></p>
+
+      <hr class="my-4">
+
+      <h5 class="mb-3">Delivery Information</h5>
+
+      <form method="post" action="/shop/checkout" id="checkoutForm">
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input class="form-control" name="delivery_name" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Region</label>
+          <select class="form-select" name="delivery_region" id="deliveryRegion" required>
+            <option value="">Select region</option>
+            <option value="LB">Lebanon (+961)</option>
+            <option value="US">USA (+1)</option>
+            <option value="AE">UAE (+971)</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Phone (local number)</label>
+          <!-- JS will set pattern / length based on region -->
+          <input
+            class="form-control"
+            name="delivery_phone"
+            required
+            placeholder="Enter local phone number"
+          >
+          <div class="form-text" id="phoneHelpText">
+            Choose a region to see phone format.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" name="delivery_address" rows="3" required></textarea>
+        </div>
+
+        <hr class="my-4">
+
+        <h5 class="mb-3">Payment Method</h5>
+        <div class="mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="payment_method"
+              id="pay_cod"
+              value="Cash on Delivery"
+              required
+            >
+            <label class="form-check-label" for="pay_cod">
+              Cash on Delivery
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="payment_method"
+              id="pay_card"
+              value="Credit Card"
+            >
+            <label class="form-check-label" for="pay_card">
+              Credit Card
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="payment_method"
+              id="pay_paypal"
+              value="PayPal"
+            >
+            <label class="form-check-label" for="pay_paypal">
+              PayPal
+            </label>
+          </div>
+        </div>
+
+        <!-- Card details section (shown for Credit Card / PayPal) -->
+        <div id="cardFields" style="display:none;">
+          <hr class="my-3">
+          <h5 class="mb-3">Card Details</h5>
+
+          <div class="mb-3">
+            <label class="form-label">Name on Card</label>
+            <input class="form-control" name="card_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Card Number</label>
+            <input
+              class="form-control"
+              name="card_number"
+              maxlength="16"
+              minlength="12"
+              pattern="\\d{12,16}"
+              placeholder="12–16 digits"
+            >
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Expiry (MM/YY)</label>
+              <input
+                class="form-control"
+                name="card_expiry"
+                placeholder="MM/YY"
+              >
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">CVV</label>
+              <input
+                class="form-control"
+                name="card_cvv"
+                maxlength="4"
+                minlength="3"
+                pattern="\\d{3,4}"
+                placeholder="3–4 digits"
+              >
+            </div>
+          </div>
+          <div class="form-text">
+            Card details are for demo only – no real payment is processed.
+          </div>
+        </div>
+
+        <button class="btn btn-dark-nike btn-pill w-100 mt-3">Place Order</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleCardFields() {
+    const method = document.querySelector('input[name="payment_method"]:checked');
+    const cardSection = document.getElementById('cardFields');
+    if (!method) {
+      cardSection.style.display = 'none';
+      return;
+    }
+    if (method.value === 'Credit Card' || method.value === 'PayPal') {
+      cardSection.style.display = 'block';
+    } else {
+      cardSection.style.display = 'none';
+    }
+  }
+
+  function updatePhoneValidation() {
+    const regionSelect = document.getElementById('deliveryRegion');
+    const phoneInput = document.querySelector('input[name="delivery_phone"]');
+    const infoSpan = document.getElementById('phoneHelpText');
+    if (!regionSelect || !phoneInput) return;
+
+    const region = regionSelect.value;
+    let cfg = null;
+
+    if (region === 'LB') {
+      cfg = { code: '+961', len: 8, label: 'Lebanon' };
+    } else if (region === 'US') {
+      cfg = { code: '+1', len: 10, label: 'USA' };
+    } else if (region === 'AE') {
+      cfg = { code: '+971', len: 9, label: 'UAE' };
+    }
+
+    if (cfg) {
+      phoneInput.placeholder = cfg.len + '-digit local number (no country code)';
+      if (infoSpan) {
+        infoSpan.textContent = cfg.label + ' (' + cfg.code + '), enter ' + cfg.len + ' digits (local number only).';
+      }
+    } else {
+      phoneInput.placeholder = 'Enter phone number';
+      if (infoSpan) {
+        infoSpan.textContent = 'Choose a region to see phone format.';
+      }
+    }
+  }
+
+  document.querySelectorAll('input[name="payment_method"]').forEach(r => {
+    r.addEventListener('change', toggleCardFields);
+  });
+
+  const regionSelectEl = document.getElementById('deliveryRegion');
+  if (regionSelectEl) {
+    regionSelectEl.addEventListener('change', updatePhoneValidation);
+  }
+
+  // Initialize on load
+  toggleCardFields();
+  updatePhoneValidation();
+</script>

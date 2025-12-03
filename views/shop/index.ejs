@@ -1,0 +1,104 @@
+<%- include('../layout', { body: '' }) %>
+
+<%
+  const qVal         = (typeof q !== 'undefined' && q !== null) ? q : '';
+  const selectedCat  = (typeof selectedCategory !== 'undefined' && selectedCategory !== null) ? selectedCategory : 'all';
+  const sortVal      = (typeof sort !== 'undefined' && sort !== null) ? sort : '';
+  const minVal       = (typeof min_price !== 'undefined' && min_price !== null) ? min_price : '';
+  const maxVal       = (typeof max_price !== 'undefined' && max_price !== null) ? max_price : '';
+  const cats         = (typeof categories !== 'undefined' && Array.isArray(categories)) ? categories : [];
+  const items        = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
+%>
+
+<section class="page-hero">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end">
+    <div class="mb-3 mb-md-0">
+      <h1 class="page-hero-title">New Drops</h1>
+      <p class="page-hero-subtitle">Performance gear built for every snap, swing, and sprint.</p>
+    </div>
+
+    <form class="d-flex flex-wrap gap-2" method="get" action="/shop">
+      <!-- Search -->
+      <input
+        class="form-control"
+        type="text"
+        name="q"
+        placeholder="Search products..."
+        value="<%= qVal %>"
+        style="min-width:180px;"
+      >
+
+      <!-- Category -->
+      <select class="form-select" name="category" style="min-width:150px;">
+        <option value="all">All categories</option>
+        <% cats.forEach(c => { %>
+          <option value="<%= c.category_id %>" <%= String(selectedCat) == String(c.category_id) ? 'selected' : '' %>>
+            <%= c.name %>
+          </option>
+        <% }) %>
+      </select>
+
+      <!-- Price range -->
+      <input class="form-control" type="number" step="0.01" name="min_price" placeholder="Min $" value="<%= minVal %>" style="max-width:110px;">
+      <input class="form-control" type="number" step="0.01" name="max_price" placeholder="Max $" value="<%= maxVal %>" style="max-width:110px;">
+
+      <!-- Sort -->
+      <select class="form-select" name="sort" style="min-width:150px;">
+        <option value="">Sort</option>
+        <option value="price_asc"  <%= sortVal === 'price_asc'  ? 'selected' : '' %>>Price: Low to High</option>
+        <option value="price_desc" <%= sortVal === 'price_desc' ? 'selected' : '' %>>Price: High to Low</option>
+        <option value="name_asc"   <%= sortVal === 'name_asc'   ? 'selected' : '' %>>Name: A-Z</option>
+        <option value="name_desc"  <%= sortVal === 'name_desc'  ? 'selected' : '' %>>Name: Z-A</option>
+      </select>
+
+      <button class="btn btn-dark-nike btn-pill" type="submit">Apply</button>
+    </form>
+  </div>
+</section>
+
+<section class="mt-4">
+  <div class="product-grid">
+    <% items.forEach(p => { %>
+      <div class="product-card">
+
+        <div class="product-card-top">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="product-tag">
+              <% if (p.badge) { %>
+                <%= p.badge %>
+              <% } else { %>
+                ProFit Essentials
+              <% } %>
+            </span>
+            <span class="product-price">$<%= p.unit_price %></span>
+          </div>
+
+          <div class="product-name"><%= p.name %></div>
+
+          <div class="product-meta">
+            In stock: <span><%= p.quantity_on_hand %></span>
+          </div>
+        </div>
+
+        <div class="product-card-bottom">
+          <form method="post" action="/shop/add">
+            <input type="hidden" name="product_id" value="<%= p.product_id %>">
+            <div class="quick-add">
+              <input
+                class="form-control"
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+              >
+              <button class="btn btn-dark-nike btn-pill" type="submit">
+                Add to cart
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    <% }) %>
+  </div>
+</section>

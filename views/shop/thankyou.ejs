@@ -1,0 +1,49 @@
+<%- include('../layout', { body: '' }) %>
+
+<div class="row justify-content-center mt-40">
+  <div class="col-lg-6">
+    <div class="card-nike">
+      <h2 class="thankyou-title text-center">Thank you!</h2>
+      <p class="thankyou-subtitle text-center">
+        Your order <strong>#<%= order.order_id %></strong> has been placed.
+      </p>
+
+      <hr>
+
+      <h5>Order Summary</h5>
+      <ul>
+        <% items.forEach(it => { %>
+          <li>
+            <%= it.quantity %> × <strong><%= it.name %></strong>
+            — $<%= Number(it.line_total || 0).toFixed(2) %>
+          </li>
+        <% }) %>
+      </ul>
+      <p>
+        <strong>Total:</strong>
+        $<%= Number(order.total_amount || 0).toFixed(2) %>
+      </p>
+      <p>
+        <strong>Payment:</strong>
+        <%= order.payment_method || 'Cash on Delivery' %>
+      </p>
+
+      <hr>
+
+      <h5>Delivery Details</h5>
+      <p>
+        <strong>Name:</strong> <%= order.delivery_name %><br>
+        <strong>Phone:</strong> <%= order.delivery_phone %><br>
+        <strong>Address:</strong> <%= order.delivery_address %>
+      </p>
+
+      <p class="mt-3">
+        <strong>Status:</strong> <%= order.status %>
+      </p>
+
+      <div class="text-center mt-3">
+        <a class="btn btn-dark-nike btn-pill" href="/shop">Continue shopping</a>
+      </div>
+    </div>
+  </div>
+</div>
