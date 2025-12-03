@@ -1,129 +1,96 @@
 ProFit Sports Store Management System
 
-A complete retail management system designed for sporting goods stores. ProFit automates daily operations such as inventory tracking, sales processing, customer management, and reporting — providing store staff and managers with an efficient, secure, and scalable system.
+A complete retail management platform designed for sporting goods stores. ProFit automates inventory, sales, reporting, and customer management with a secure and scalable architecture.
 
-📝 Project Overview
+Overview
 
 ProFit Sports Store System is built to:
 
-Automate manual store operations
+  - Automate daily store operations
 
-Keep inventory synced in real time
+  - Maintain accurate inventory levels
 
-Process sales quickly and accurately
+  - Process sales efficiently
 
-Generate detailed sales & inventory reports
+  - Generate real-time analytics and reports
 
-Maintain secure user authentication with roles
+  - Provide role-based secure access
 
-Support store growth and future modules
+  - Support future scaling (multi-branch, e-commerce, cloud)
 
-The system is designed using a three-tier architecture (Presentation → Application → Data) following best practices for modularity, security, and scalability.
+The system follows a Three-Tier Architecture:
 
-🚀 Features
-Inventory Management
+  - Presentation Layer – UI
 
-Add, edit, delete, and categorize products
+  - Application Layer – Backend logic
 
-Real-time stock updates after each sale
+  - Data Layer – MySQL database
 
-Low-stock alerts
+Features: 
 
-Supplier link for each item
+  - Inventory Management: 
 
-Sales & Billing
+    Add / edit / delete products
 
-POS-style checkout
+    Auto stock updates after sales
 
-Barcode scanning support
+    Supplier-linked items
 
-Automatic total/discount calculation
+    Low-stock alerts
 
-Printable & digital receipts
+  - Sales & POS
 
-Secure payment handling
+    Barcode scanning
 
-Customer Management
+    Apply discounts
 
-Store customer profiles
+    Multi-payment methods
 
-Loyalty points tracking
+    Generate digital/printable receipts
 
-Fast lookup for returning customers
+  - Customer Management
 
-Supplier Management
+    Store customer info
 
-Manage suppliers and purchase orders
+    Loyalty points
 
-Automated restock suggestions
+    Quick lookup
 
-Reporting & Analytics
+  - Supplier Management
 
-Daily, weekly, monthly sales reports
+    Manage suppliers
 
-Inventory summary reports
+    Create purchase orders
 
-Top-selling product analytics
+    Stock replenishment alerts
 
-Export to PDF
+  - Reporting & Analytics
 
-Security
+    Daily / weekly / monthly reports
 
-Role-based access control (Admin, Manager, Cashier)
+    Inventory reports
 
-Encrypted data (passwords, personal info)
+    Top-selling products
 
-Session timeout & secure login
+    Export to PDF
 
-Full audit logs
+  - Security
 
-🏗 System Architecture
-Three-Tier Structure
+    RBAC (Admin, Manager, Cashier)
 
-Presentation Layer: HTML, CSS, JavaScript
+    Password hashing
 
-Application Layer: (your backend framework, e.g., Node.js / Django / Flask)
+    Encrypted data
 
-Data Layer: MySQL relational database
+    Session timeout
 
-Client–Server Model
+    Full activity logs
 
-POS terminals and management PCs communicate with a central server through secure HTTPS requests.
+Tech Stack: 
 
-Component-Based Design
-
-Modules:
-
-Authentication
-
-Inventory
-
-Sales & Billing
-
-Reporting
-
-Supplier
-
-Customer
-
-Notifications
-
-Backup & Recovery
-
-🛠 Tech Stack
-Layer	Technology
-Frontend	HTML, CSS, JavaScript
-Backend	Node.js / Django / Flask (your choice — tell me if you want it customized)
-Database	MySQL
-Other	HTTPS/TLS, Automated Backups, Role-Based Access
-📦 Project Setup Instructions
-
-Before starting, make sure you have installed:
-
-Node.js (if backend is Node) OR Python (for Django/Flask)
-
-MySQL Server
-
-Git
-
-VS Code
+| Layer    | Technology                                        |
+| -------- | ------------------------------------------------- |
+| Frontend | HTML, CSS, JavaScript                             |
+| Backend  | Node.js / Django / Flask (choose your actual one) |
+| Database | MySQL                                             |
+| Other    | HTTPS/TLS, Auto-backups                           |
